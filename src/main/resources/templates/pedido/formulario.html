@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+			crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="container">
+			<div class="jumbotron mb-0">
+				<h1 class="display-4">Meus Pedidos</h1>
+			</div>
+			<div class="card mt-3">
+				<form th:object="${requisicaoNovoPedido}" class="card-body" action="/pedido/novo" method="post">
+					<div class="form-group mb-3">
+						<label for="nomeProduto">Produto</label>
+						<input th:field="*{nomeProduto}" class="form-control" placeholder="nome do produto" />
+						<small>Informe qual o nome do produto</small>
+					</div>
+					<div class="form-group mb-3">
+						<label for="urlProduto">Url</label>
+						<input th:field="*{urlProduto}" class="form-control" placeholder="url do produto" />
+						<small>Procure em um site o produto que você deseja e cole aqui a url da página aqui.</small>
+					</div>
+					<div class="form-group mb-3">
+						<label for="urlImagem">Imagem</label>
+						<input th:field="*{urlImagem}" class="form-control" placeholder="url da imagem" />
+						<small>Copie uma url de uma boa imagem do produto e cole para ajudar a divulgar para seus compradores.</small>
+					</div>
+					<div class="form-group mb-3">
+						<label for="descricao">Descrição</label>
+						<Textarea class="form-control" name="descricao" placeholder="Adicione detalher importantes para seu comprador"></Textarea>
+					</div>
+					<button class="btn btn-primary" type="submit">Cadastrar</button>
+				</form>
+			</div>
+			
+		</div>
+	</body>
+</html>

@@ -6,13 +6,13 @@ import br.com.tiago.mvc.model.Pedido;
 
 public class RequisicaoNovoPedido {
 
-	@NotBlank
+	@NotBlank(message = "Obrigatório preenchimento do campo com o nome do produto.")
 	private String nomeProduto;
 	
-	@NotBlank
+	@NotBlank(message = "Obrigatório preenchimento do campo com a url do produto.")
 	private String urlProduto; 
 	
-	@NotBlank
+	@NotBlank(message = "Obrigatório preenchimento do campo com a url da imagem.")
 	private String urlImagem ; 
 	private String descricao;
 	

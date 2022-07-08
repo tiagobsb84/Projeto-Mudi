@@ -3,6 +3,7 @@ package br.com.tiago.mvc.dto;
 import javax.validation.constraints.NotBlank;
 
 import br.com.tiago.mvc.model.Pedido;
+import br.com.tiago.mvc.model.StatusPedidos;
 
 public class RequisicaoNovoPedido {
 
@@ -47,6 +48,7 @@ public class RequisicaoNovoPedido {
 		pedido.setDescricao(descricao);
 		pedido.setUrlProduto(urlProduto);
 		pedido.setUrlImagem(urlImagem);
+		pedido.setStatus(StatusPedidos.AGUARDANDO);
 		return pedido;
 	}
 }

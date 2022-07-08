@@ -1,52 +1,58 @@
 <html>
 	<head th:replace="~{base :: head}"></head>
-<body>
-	<div th:replace="~{base :: logo}"></div>
-	
-	<div class="container">
-		<div th:replace="~{base :: titulo('Meus Pedidos')}"></div>
+	<body>
+		<div th:replace="~{base :: logo}"></div>
 		
-		<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
-			<div class="navbar-nav">
-				<a class="nav-item nav-link active" href="" >Todos</a>
-				<a class="nav-item nav-link" href="" >Aguardando</a>
-				<a class="nav-item nav-link" href="" >Aprovado</a>
-				<a class="nav-item nav-link" href="" >Entregue</a>
-			</div>
-			<a href="/pedido/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
-		</nav>
-		
-		<div class="card mb-3" th:each="pedido : ${pedidos}">
-			<div class="card-header" th:text="${pedido.nomeProduto}">Nome do produto</div>
-			<div class="card-body">
-				<div class="row">
-					<div class="col-12 col-sm-8 mb-3">
-						<div class="row">
-							<div class="col-md-5">
-								Valor: <span th:text="${pedido.valorNegociado}">280,00</span>
+		<div class="container">
+			<div th:replace="~{base :: titulo('Meus Pedidos')}"></div>
+			
+			<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
+				<div class="navbar-nav">
+					<a class="nav-item nav-link active" href="" >Todos</a>
+					<a class="nav-item nav-link" href="" >Aguardando</a>
+					<a class="nav-item nav-link" href="" >Aprovado</a>
+					<a class="nav-item nav-link" href="" >Entregue</a>
+				</div>
+				<a href="/pedido/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
+			</nav>
+			
+			<div class="card mb-3" th:each="pedido : ${pedidos}">
+				
+				<th:block th:switch = "${#strings.toString(pedido.status)}">
+                	<div th:case="'AGUARDANDO'" class="card-header alert alert-warning" th:text="${pedido.nomeProduto}">Nome do Produto</div>
+					<div th:case="'APROVADO'" class="card-header alert alert-success" th:text="${pedido.nomeProduto}">Nome do Produto</div>
+					<div th:case="'ENTREGUE'" class="card-header alert alert-dark"   th:text="${pedido.nomeProduto}">Nome do Produto</div>
+            	</th:block>
+				
+				<div class="card-body">
+					<div class="row">
+						<div class="col-12 col-sm-8 mb-3">
+							<div class="row">
+								<div class="col-md-5">
+									Valor: <span th:text="${pedido.valorNegociado}">280,00</span>
+								</div>
+								<div class="col-md-7">
+									Data de entrega: <span th:text="${pedido.dataDaEntrega}">22/02/2022</span>
+								</div>
 							</div>
-							<div class="col-md-7">
-								Data de entrega: <span th:text="${pedido.dataDaEntrega}">22/02/2022</span>
+			
+							<div>Produto</div>
+							<input class="form-control" th:value="${pedido.urlProduto}"
+								value="Url do Produto" />
+			
+							<div>Descrição</div>
+							<div>
+								<textarea class="form-control" th:text="${pedido.descricao}">Descrição do pedido</textarea>
 							</div>
 						</div>
-		
-						<div>Produto</div>
-						<input class="form-control" th:value="${pedido.urlProduto}"
-							value="Url do Produto" />
-		
-						<div>Descrição</div>
-						<div>
-							<textarea class="form-control" th:text="${pedido.descricao}">Descrição do pedido</textarea>
-						</div>
-					</div>
-					<div class="col-12 col-sm-4">
-						<div>
-							<img class="img-thumbnail" th:alt="${pedido.nomeProduto}" th:src="${pedido.urlImagem}" src="" />
+						<div class="col-12 col-sm-4">
+							<div>
+								<img class="img-thumbnail" th:alt="${pedido.nomeProduto}" th:src="${pedido.urlImagem}" src="" />
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</body>
+	</body>
 </html>
